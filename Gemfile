@@ -22,9 +22,10 @@ gem 'turbolinks', '~> 5'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'pry-remote'
-  gem 'pry-byebug'
+  gem 'rubocop', require: false
 end
 
 group :development do
