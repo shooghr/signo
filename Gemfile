@@ -29,6 +29,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'factory_girl_rails', require: false
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -37,6 +38,13 @@ end
 
 group :test do
   gem 'autotest-rails', require: false
+  gem 'rails-controller-testing'
+  gem 'rspec'
+  gem 'rspec-core', '~> 3.5'
+  gem 'rspec-expectations', '~> 3.5'
+  gem 'rspec-mocks', '~> 3.5'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-support', '~> 3.5'
   gem 'simplecov', '0.10.0', require: false
   gem 'simplecov-badge', require: false
 end

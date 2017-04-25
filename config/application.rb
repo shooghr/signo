@@ -8,8 +8,13 @@ Bundler.require(*Rails.groups)
 
 module Signo
   class Application < Rails::Application
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
+    config.generators do |g|
+      g.stylesheets false
+      g.test_framework :rspec, fixture: true
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+      g.view_specs false
+      g.helper_specs true
+      g.integration_tool :rspec
+    end
   end
 end
