@@ -49,4 +49,4 @@ group :test do
   gem 'simplecov-badge', require: false
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

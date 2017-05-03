@@ -1,5 +1,13 @@
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*'
+
 Documentation:
   Enabled: false
 
 Metrics/LineLength:
   Max: 120
+
+Metrics/BlockLenght:
+  CountComments: false
+  Max: 25
