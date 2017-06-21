@@ -1,5 +1,0 @@
-class AddStatusToNotification < ActiveRecord::Migration[5.0]
-  def change
-    add_column :notifications, :status, :string
-  end
-end
