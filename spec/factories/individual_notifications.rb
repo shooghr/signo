@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :individual_notification do
-    references ""
-    references ""
+    notification nil
+    user nil
     status "MyString"
   end
 end

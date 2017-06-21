@@ -1,8 +1,8 @@
 class CreateIndividualNotifications < ActiveRecord::Migration[5.0]
   def change
     create_table :individual_notifications do |t|
-      t.notification :references
-      t.user :references
+      t.references :notification, foreign_key: true
+      t.references :user, foreign_key: true
       t.string :status
 
       t.timestamps
