@@ -21,4 +21,4 @@
 .byebug_history
 
 # Ignore all config file secret
-config/database.yml
+/config/database.yml
