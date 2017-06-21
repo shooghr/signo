@@ -1,0 +1,2 @@
+class IndividualNotification < ApplicationRecord
+end
