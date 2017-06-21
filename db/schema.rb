@@ -10,16 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503132045) do
+ActiveRecord::Schema.define(version: 20170620173009) do
 
   create_table "notifications", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
     t.string   "sender"
-    t.string   "recipient"
     t.string   "link"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "cpf_receiver"
+    t.integer  "channel"
+    t.string   "module"
+    t.string   "status"
   end
 
 end
