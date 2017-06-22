@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170622133003) do
+ActiveRecord::Schema.define(version: 20170622144500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,9 +39,8 @@ ActiveRecord::Schema.define(version: 20170622133003) do
     t.string   "content"
     t.string   "sender"
     t.string   "link"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "cpf_receiver"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "channel"
     t.string   "module"
   end
