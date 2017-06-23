@@ -1,5 +1,7 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: %i[show edit update destroy]
+  protect_from_forgery prepend: true, with: :null_session
+  skip_before_action :verify_authenticity_token
 
   # GET /notifications
   # GET /notifications.json
@@ -23,9 +25,9 @@ class NotificationsController < ApplicationController
   # POST /notifications.json
   def create
     @notification = Notification.new(notification_params)
-
     respond_to do |format|
       if @notification.save
+        @notification.individual_notification(users_params)
         format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
         format.json { render :show, status: :created, location: @notification }
       else
@@ -68,6 +70,10 @@ class NotificationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def notification_params
-    params.require(:notification).permit(:title, :content, :sender, :recipient, :link)
+    params.require(:notification).permit(:title, :content, :sender, :link, :channel, :module)
+  end
+
+  def users_params
+    params[:notification][:users]
   end
 end

@@ -1,5 +1,9 @@
+require 'systens'
+
 class Notification < ApplicationRecord
   extend Enumerize
+  has_many :individual_notifications, dependent: :destroy
+  has_many :users, through: :individual_notifications
 
   CHANNEL = {
     1 => %i[system], 2 => %i[email], 3 => %i[susiebot],
@@ -9,7 +13,11 @@ class Notification < ApplicationRecord
 
   enumerize :status, in: %i[success failure cancel]
 
-  after_create_commit { NotifierJob.perform_later('35308899894', Notification.last(10)) }
+  def individual_notification(cpfs)
+    cpfs.each do |individual|
+      NotifierJob.perform_later(individual[:cpf], Notification.last(15))
+    end
+  end
 
   def send_for_channel; end
 end
