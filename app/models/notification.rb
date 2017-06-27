@@ -14,8 +14,10 @@ class Notification < ApplicationRecord
   enumerize :status, in: %i[success failure cancel]
 
   def individual_notification(cpfs)
-    cpfs.each do |individual|
-      NotifierJob.perform_later(individual[:cpf], Notification.last(15))
+    cpfs.flatten.each do |individual|
+      user = User.find_by(cpf: individual)
+      IndividualNotification.create(user_id: user.id, notification_id: id)
+      NotifierJob.perform_later(individual, user, user.notifications_actives)
     end
   end
 
