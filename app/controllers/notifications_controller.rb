@@ -1,5 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[create update]
   protect_from_forgery prepend: true, with: :null_session
   skip_before_action :verify_authenticity_token
 
@@ -24,7 +25,7 @@ class NotificationsController < ApplicationController
   # POST /notifications
   # POST /notifications.json
   def create
-    @notification = Notification.new(notification_params)
+    @notification = Notification.new(notification_params.merge(sender: @user))
     respond_to do |format|
       if @notification.save
         @notification.individual_notification(users_params)
@@ -68,9 +69,13 @@ class NotificationsController < ApplicationController
     @notification = Notification.find(params[:id])
   end
 
+  def set_user
+    @user = User.find_by(cpf: params[:notification][:sender])
+  end
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def notification_params
-    params.require(:notification).permit(:title, :content, :app, :sender, :link, :channel, :module)
+    params.require(:notification).permit(:title, :content, :app, :link, :channel, :module)
   end
 
   def users_params

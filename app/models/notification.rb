@@ -2,6 +2,9 @@ require 'systens'
 
 class Notification < ApplicationRecord
   extend Enumerize
+
+  belongs_to :sender, foreign_key: 'sender', class_name: 'User'
+
   has_many :individual_notifications, dependent: :destroy
   has_many :users, through: :individual_notifications
 
