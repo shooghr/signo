@@ -9,7 +9,7 @@ set :repo_url, 'ssh://git@gitlab.defensoria.to.gov.br:10122/defensoria/signo.git
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/#{fetch(:user)}/apps/#{fetch(:application)}'
+set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :branch, 'master'
 
 # Default value for :format is :airbrussh.
