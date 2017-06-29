@@ -14,7 +14,7 @@ set :nginx_access_log_file, shared_path.join('log/nginx.stdout.log')
 set :nginx_error_log_file, shared_path.join('log/nginx.stderr.log')
 
 set :unicorn_pid, shared_path.join('tmp/pids/unicorn.pid')
-set :unicorn_config, shared_path.join('config/unicorn.rb')
+set :unicorn_config_path, shared_path.join('config/unicorn.rb')
 set :unicorn_service, "unicorn_#{fetch(:application)}_#{fetch(:stage)}"
 set :unicorn_workers, 3
 # role-based syntax
