@@ -18,7 +18,7 @@
       <tr>
         <td><%= notification.title %></td>
         <td><%= notification.content %></td>
-        <td><%= notification.sender %></td>
+        <td><%= notification.sender.username %></td>
         <td><%= notification.link %></td>
         <td><%= link_to 'Show', notification %></td>
         <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
