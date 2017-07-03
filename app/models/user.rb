@@ -7,6 +7,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   def notifications_actives
-    notifications.includes(:individual_notifications).where('individual_notifications.status is null').last(10)
+    notifications.last_not_read.map { |n| n.map_attributes(id) }
+  end
+
+  def abstract_attributes
+    attributes.slice('id', 'username', 'email')
   end
 end
