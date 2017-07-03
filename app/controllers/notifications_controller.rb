@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :set_notification, only: %i[show edit update destroy]
+  before_action :set_notification, only: %i[show edit update destroy redirect]
   before_action :set_user, only: %i[create update]
   protect_from_forgery prepend: true, with: :null_session
   skip_before_action :verify_authenticity_token
@@ -30,7 +30,7 @@ class NotificationsController < ApplicationController
       if @notification.save
         @notification.individual_notification(users_params)
         format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
-        format.json { render :show, status: :created, location: @notification }
+        format.json status: :created
       else
         format.html { render :new }
         format.json { render json: @notification.errors, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class NotificationsController < ApplicationController
     respond_to do |format|
       if @notification.update(notification_params)
         format.html { redirect_to @notification, notice: 'Notification was successfully updated.' }
-        format.json { render :show, status: :ok, location: @notification }
+        format.json status: :ok
       else
         format.html { render :edit }
         format.json { render json: @notification.errors, status: :unprocessable_entity }
@@ -60,6 +60,10 @@ class NotificationsController < ApplicationController
       format.html { redirect_to notifications_url, notice: 'Notification was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def redirect
+    redirect_to @notification.link
   end
 
   private
