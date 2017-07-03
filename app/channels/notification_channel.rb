@@ -5,9 +5,8 @@ class NotificationChannel < ApplicationCable::Channel
       stream_from 'notification_channel'
     else
       stop_all_streams
-      user = User.find_by(cpf: params['user'])
       stream_from "notification_channel_#{params['user']}"
-      NotifierJob.perform_later(params['user'], user, user.notifications_actives)
+      NotifierJob.perform_later(params['user'])
     end
   end
 
