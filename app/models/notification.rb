@@ -14,15 +14,28 @@ class Notification < ApplicationRecord
     123 => %i[system email susiebot]
   }.freeze
 
+  scope :last_not_read, -> {
+    includes(:individual_notifications).where('individual_notifications.status is null').last(10)
+  }
+
   enumerize :status, in: %i[success failure cancel]
 
   def individual_notification(cpfs)
     cpfs.flatten.each do |individual|
-      user = User.find_by(cpf: individual)
       IndividualNotification.create(user_id: user.id, notification_id: id)
-      NotifierJob.perform_later(individual, user, user.notifications_actives)
+      NotifierJob.perform_later(individual)
     end
   end
 
   def send_for_channel; end
+
+  def link_redirect(user_id)
+    "http//signo.defensoria.to.gov.br/users/#{user_id}/notification/#{id}/redirect"
+  end
+
+  def map_attributes(user_id)
+    attributes.slice('id', 'content', 'title', 'created_at', 'app')
+              .merge(link: link_redirect(user_id))
+              .merge(sender: sender.abstract_attributes)
+  end
 end
