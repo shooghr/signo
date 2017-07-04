@@ -63,7 +63,18 @@ class NotificationsController < ApplicationController
   end
 
   def redirect
+    user_id = request.path.match(/\d{1,9}/)[0].to_i
+    individual_notification = IndividualNotification.find_by(user_id: user_id, notification_id: @notification.id)
+    individual_notification.update(read_at: Time.now)
     redirect_to @notification.link
+  end
+
+  def mark_all_read
+    user = User.find(params[:id])
+    user.individual_notifications.each do |notification|
+      notification.update(read_at: Time.now)
+    end
+    render plain: :ok
   end
 
   private

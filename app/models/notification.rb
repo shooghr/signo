@@ -34,9 +34,8 @@ class Notification < ApplicationRecord
   end
 
   def map_attributes(user_id)
-    attributes.slice('id', 'content', 'title', 'created_at', 'app')
-              .merge(link: link_redirect(user_id))
-              .merge(sender: sender.abstract_attributes)
+    slice('id', 'content', 'title', 'created_at', 'app').merge(link: link_redirect(user_id))
+                                                        .merge(sender: sender.abstract_attributes)
   end
 
   def url

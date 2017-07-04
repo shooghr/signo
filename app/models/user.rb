@@ -11,6 +11,6 @@ class User < ApplicationRecord
   end
 
   def abstract_attributes
-    attributes.slice('id', 'username', 'email')
+    slice('id', 'username', 'email')
   end
 end

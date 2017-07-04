@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :users do
     member do
       resources :notifications do
+        collection do
+          get 'mark_all_read' => 'notifications#mark_all_read'
+        end
         member do
           get 'redirect' => 'notifications#redirect'
         end
