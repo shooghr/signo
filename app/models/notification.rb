@@ -30,12 +30,16 @@ class Notification < ApplicationRecord
   def send_for_channel; end
 
   def link_redirect(user_id)
-    "http//signo.defensoria.to.gov.br/users/#{user_id}/notification/#{id}/redirect"
+    "#{url}/users/#{user_id}/notification/#{id}/redirect"
   end
 
   def map_attributes(user_id)
     attributes.slice('id', 'content', 'title', 'created_at', 'app')
               .merge(link: link_redirect(user_id))
               .merge(sender: sender.abstract_attributes)
+  end
+
+  def url
+    YAML.safe_load(File.read("#{Rails.root}/config/url.yml"))[Rails.env]['host']
   end
 end

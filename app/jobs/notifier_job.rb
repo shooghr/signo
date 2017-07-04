@@ -9,9 +9,13 @@ class NotifierJob < ApplicationJob
                           notifications:
                           { 
                             receiver: user,
-                            all_message: { link: "http://localhost:3002/users/#{user.id}/notifications" },
+                            all_message: { link: "#{url}/users/#{user.id}/notifications" },
                             mark_all_read: { link: nil },
                             message: user.notifications_actives
                           }
+  end
+
+  def url
+    YAML.safe_load(File.read("#{Rails.root}/config/url.yml"))[Rails.env]['host']
   end
 end
