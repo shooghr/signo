@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :accesses
   devise_for :users
 
+  resources :notifications, only: %i[index new create update]
+
   resources :users do
     member do
       resources :notifications do

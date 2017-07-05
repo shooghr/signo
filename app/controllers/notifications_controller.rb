@@ -30,7 +30,7 @@ class NotificationsController < ApplicationController
       if @notification.save
         @notification.individual_notification(users_params)
         format.html { redirect_to @notification, notice: 'Notification was successfully created.' }
-        format.json status: :created
+        format.json { render @notification, status: :created }
       else
         format.html { render :new }
         format.json { render json: @notification.errors, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class NotificationsController < ApplicationController
     respond_to do |format|
       if @notification.update(notification_params)
         format.html { redirect_to @notification, notice: 'Notification was successfully updated.' }
-        format.json status: :ok
+        format.json { render @notification, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @notification.errors, status: :unprocessable_entity }

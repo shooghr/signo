@@ -15,14 +15,16 @@ class Notification < ApplicationRecord
   }.freeze
 
   scope :last_not_read, -> {
-    includes(:individual_notifications).where('individual_notifications.status is null').last(10)
+    includes(:individual_notifications).where('individual_notifications.read_at is null').last(10)
   }
 
   enumerize :status, in: %i[success failure cancel]
 
   def individual_notification(cpfs)
-    cpfs.flatten.each do |individual|
-      IndividualNotification.create(user_id: user.id, notification_id: id)
+    # binding.pry
+    cpfs&.flatten&.each do |individual|
+      user_id = User.find_by(cpf: individual).id
+      IndividualNotification.create(user_id: user_id, notification_id: id)
       NotifierJob.perform_later(individual)
     end
   end
