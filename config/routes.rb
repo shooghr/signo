@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         end
         member do
           get 'redirect' => 'notifications#redirect'
+          get 'mark_as_read' => 'notifications#mark_as_read'
         end
       end
     end

@@ -31,12 +31,13 @@ class Notification < ApplicationRecord
 
   def send_for_channel; end
 
-  def link_redirect(user_id)
-    "#{url}/users/#{user_id}/notification/#{id}/redirect"
+  def link_action(user_id, action)
+    "#{url}/users/#{user_id}/notifications/#{id}/#{action}"
   end
 
   def map_attributes(user_id)
-    slice('id', 'content', 'title', 'created_at', 'app').merge(link: link_redirect(user_id))
+    slice('id', 'content', 'title', 'created_at', 'app').merge(link: link_action(user_id, 'redirect'))
+                                                        .merge(mark_as_read: link_action(user_id, 'mark_as_read'))
                                                         .merge(sender: sender.abstract_attributes)
   end
 
