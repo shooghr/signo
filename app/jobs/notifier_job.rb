@@ -8,7 +8,6 @@ class NotifierJob < ApplicationJob
     ActionCable.server.broadcast "notification_channel_#{cpf}",
                                  notifications:
                                   {
-                                    receiver: user.abstract_attributes,
                                     all_message: { link: "#{url}/users/#{user.id}/notifications" },
                                     mark_all_read: { link: "#{url}/users/#{user.id}/notifications/mark_all_read" },
                                     message: messages
