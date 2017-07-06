@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :set_notification, only: %i[show edit update destroy redirect]
+  before_action :set_notification, only: %i[show edit update destroy redirect mark_as_read]
   before_action :set_user, only: %i[create update]
   protect_from_forgery prepend: true, with: :null_session
   skip_before_action :verify_authenticity_token
@@ -74,6 +74,15 @@ class NotificationsController < ApplicationController
     user.individual_notifications.each do |notification|
       notification.update(read_at: Time.now)
     end
+    NotifierJob.perform_later(user.cpf)
+    render plain: :ok
+  end
+
+  def mark_as_read
+    user_id = request.path.match(/\d{1,9}/)[0].to_i
+    individual_notification = IndividualNotification.find_by(user_id: user_id, notification_id: @notification.id)
+    individual_notification.update(read_at: Time.now)
+    NotifierJob.perform_later(User.find_by(id: user_id).cpf)
     render plain: :ok
   end
 
