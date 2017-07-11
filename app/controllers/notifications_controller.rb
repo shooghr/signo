@@ -80,10 +80,10 @@ class NotificationsController < ApplicationController
   end
 
   def mark_as_read
-    user_id = request.path.match(/\d{1,9}/)[0].to_i
-    individual_notification = IndividualNotification.find_by(user_id: user_id, notification_id: @notification.id)
+    user = User.find_by(id: request.path.match(/\d{1,9}/)[0].to_i)
+    individual_notification = IndividualNotification.find_by(user_id: user.id, notification_id: @notification.id)
     individual_notification.update(read_at: Time.now)
-    NotifierJob.perform_later(User.find_by(id: user_id).cpf)
+    NotifierJob.perform_later(user.cpf)
     render plain: :ok
   end
 

@@ -4,7 +4,6 @@ class NotifierJob < ApplicationJob
   def perform(cpf)
     user = User.find_by(cpf: cpf)
     messages = user.notifications_actives
-    return if messages.empty?
     ActionCable.server.broadcast "notification_channel_#{cpf}",
                                  notifications:
                                   {
