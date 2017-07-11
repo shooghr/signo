@@ -37,6 +37,27 @@ namespace :imports do
       end
     end
   end
+
+  desc 'Importação dos nomes dos usuários do sistema'
+  task names: :environment do
+    servidores = JSON.parse(RestClient.get('http://odin.defensoria.to.gov.br/servidores.json'))
+
+    servidores.each do |servidor|
+      user = find_user(servidor['cpf'])
+      if user.nil?
+        puts "Usário não encontrado #{servidor['nome']} - #{servidor['cpf']}"
+      else
+        user.name = servidor['to_s']
+        user.save!
+      end
+    end
+  end
+
+  task all: :environment do
+    Rake::Task['imports:users'].invoke
+    Rake::Task['imports:notifications'].invoke
+    Rake::Task['imports:names'].invoke
+  end
 end
 
 def attributes_user(user)
