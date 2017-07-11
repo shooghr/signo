@@ -1,13 +1,14 @@
 class NotificationsController < ApplicationController
   before_action :set_notification, only: %i[show edit update destroy redirect mark_as_read]
-  before_action :set_user, only: %i[create update]
+  before_action :set_user, only: %i[create update index]
   protect_from_forgery prepend: true, with: :null_session
   skip_before_action :verify_authenticity_token
 
   # GET /notifications
   # GET /notifications.json
   def index
-    @notifications = Notification.all
+    @q = Notification.includes(:sender).all.search([:q])
+    @notifications = @q.result(distinct: true).page(params[:page]).per(15)
   end
 
   # GET /notifications/1
@@ -94,7 +95,11 @@ class NotificationsController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(cpf: params[:notification][:sender])
+    if params[:notification].nil?
+      @user = User.find_by(id: params[:id])
+    else
+      @user = User.find_by(cpf: params[:notification][:sender])
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

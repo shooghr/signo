@@ -22,6 +22,11 @@ module Signo
     config.autoload_paths += %W(#{config.root}/app/validators #{config.root}/app/controllers/before_actions)
     config.active_record.raise_in_transactional_callbacks = true
 
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Method' => '*'
+    }
+
     config.generators do |g|
       g.stylesheets false
       g.test_framework :rspec, fixture: true

@@ -1,33 +1,50 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Notifications</h1>
+<div class="widget col-md-offset-2 col-md-8">
+  <div class="widget-body padding-none">
+    <h1>Notificações - <%= @user.full_name.titlecase %></h1>
+    </br>
+    <table class="table table-vertical-center margin-none table-primary">
+      <thead>
+        <tr>
+          <th><%= sort_link @q, :title %></th>
+          <th><%= sort_link @q, :content %></th>
+          <th><%= sort_link @q, :sender %></th>
+          <th><%= sort_link @q, :app %></th>
+          <th>Read</th>
+          <th class="text-center"><%= t('helpers.actions')  %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @notifications.each do |notification| %>
+          <tr>
+            <td><%= notification.title || t('views.notification.no_title') %></td>
+            <td><%= notification.content || t('views.notification.no_content') %></td>
+            <td><%= notification.sender.username %></td>
+            <td><%= notification.app %></td>
+            <td>Not read</td>
+            <td class="text-center">
+              <%= link_to notification, :class=>"btn btn-default btn-sm" do %>
+                <%= fa_icon "eye" %>
+              <% end %>
+              <%= link_to edit_notification_path(notification), :class=>"btn btn-success btn-sm" do %>
+                <%= fa_icon "pencil" %>
+              <% end  %>
+              <%= link_to notification, method: :delete, data: { confirm: 'Are you sure?' },
+               :class=>"btn btn-danger btn-sm no-ajaxify" do %>
+                <%= fa_icon "trash-o" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <div align="center">
+    <%= paginate @notifications %>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Sender</th>
-      <th>Link</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @notifications.each do |notification| %>
-      <tr>
-        <td><%= notification.title %></td>
-        <td><%= notification.content %></td>
-        <td><%= notification.sender.username %></td>
-        <td><%= notification.link %></td>
-        <td><%= link_to 'Show', notification %></td>
-        <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
-        <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
-
-<%= link_to 'New Notification', new_notification_path %>

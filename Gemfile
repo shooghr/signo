@@ -9,15 +9,21 @@ end
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'enumerize'
+gem 'font-awesome-rails'
+gem 'kaminari'
+gem 'less-rails'
 gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.2'
 gem 'rails-i18n', '~> 5.0.0'
+gem 'ransack'
+gem 'rest-client'
 gem 'sass-rails', '~> 5.0'
+gem 'therubyracer', platforms: :ruby
+gem 'twitter-bootstrap-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
 gem 'unicorn-rails'
-# gem 'therubyracer', platforms: :ruby
 
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
