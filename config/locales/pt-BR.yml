@@ -1,0 +1,33 @@
+pt-BR:
+  day: "d"
+  days: "d"
+  month: "m"
+  months: "m"
+  year: "a"
+  years: "a"
+  boolean:
+    "true": "sim"
+    "false": "não"
+    ativo:
+      "true": "ativo"
+      "false": "inativo"
+  views:
+    pagination:
+      first: "&laquo; Primeiro"
+      last: "Último &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Próximo &rsaquo;"
+      truncate: "&hellip;"
+    notification:
+      no_title: "Nenhum Título"
+      no_content: "Nenhum Conteudo"
+      title: Título
+
+  models:
+
+  helpers:
+
+  activerecord:
+    notification:
+      title: Título
+    
