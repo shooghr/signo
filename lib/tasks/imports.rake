@@ -68,11 +68,11 @@ end
 
 def attributes_notification(n)
   user = find_sender(n['remetente_old_cpf'], n['remetente_cpf'])
-  { app: n['aplicacao'], title: n['título'], link: n['link'], sender: user }
+  { app: n['aplicacao'], title: n['titulo'], link: n['link'], sender: user }
 end
 
 def attributes_individual(individual, notification_id)
-  user = find_user(individual['cpf'])
+  user = find_user(individual['servidor_cpf'] || individual['servidor_cpf'])
   { notification_id: notification_id, user: user, read_at: individual['read_at'] }
 end
 
