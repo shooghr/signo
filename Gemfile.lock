@@ -220,6 +220,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.8)
       ffi (>= 0.5.0)
+    redis (3.3.1)
     ref (2.0.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
@@ -355,6 +356,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-i18n (~> 5.0.0)
   ransack
+  redis (~> 3.0)
   rest-client
   rspec
   rspec-core (~> 3.5)
