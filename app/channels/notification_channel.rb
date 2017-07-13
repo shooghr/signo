@@ -1,5 +1,6 @@
 class NotificationChannel < ApplicationCable::Channel
   def subscribed
+    logger.info "#{params}"
     if params['user'].nil?
       stop_all_streams
       stream_from 'notification_channel'
