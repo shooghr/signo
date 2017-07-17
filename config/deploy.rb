@@ -39,4 +39,4 @@ set :rvm_sudo, false
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
-after 'deploy:finishing', 'unicorn:restart'
+# after 'deploy:finishing', 'unicorn:restart'

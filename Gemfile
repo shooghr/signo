@@ -22,8 +22,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'therubyracer', platforms: :ruby
 gem 'twitter-bootstrap-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'unicorn'
-gem 'unicorn-rails'
+# gem 'unicorn'
+# gem 'unicorn-rails'
 
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
@@ -46,7 +46,8 @@ group :development do
   gem 'capistrano-rake'
   gem 'capistrano-rails', '~> 1.3'
   gem 'capistrano-rvm'
-  gem 'capistrano3-unicorn'
+  gem 'capistrano3-puma'
+  # gem 'capistrano3-unicorn'
   gem 'factory_girl_rails', require: false
   gem 'listen', '~> 3.0.5'
   gem 'spring'
