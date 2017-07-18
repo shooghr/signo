@@ -3,7 +3,7 @@ lock '3.8.2'
 require 'pry'
 
 set :application, 'signo'
-set :user, 'deploy'
+set :user, 'desenvolvimento'
 set :repo_url, 'ssh://git@gitlab.defensoria.to.gov.br:10122/defensoria/signo.git'
 
 # Default branch is :master
