@@ -3,7 +3,7 @@
 # Any libraries that use thread pools should be configured to match
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum, this matches the default thread size of Active Record.
-DEPLOY_ROOT = '/home/desenvolvimento/apps/signo'
+DEPLOY_ROOT = '/var/www/signo'
 app_dir = File.expand_path('../..', __FILE__)
 shared_dir = "#{ DEPLOY_ROOT }/shared"
 

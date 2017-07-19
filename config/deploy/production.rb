@@ -3,9 +3,9 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server '10.60.1.32', user: "#{fetch(:user)}", roles: %w{app db web}, my_property: :my_value
+server '10.60.20.249', user: "#{fetch(:user)}", roles: %w{app db web}, my_property: :my_value
 
-set :nginx_server_name, "#{fetch(:application)}.defensoria.to.gov.br"
+set :nginx_server_name, "#{fetch(:application)}.com.br"
 set :nginx_pid, '/run/nginx.pid'
 set :nginx_location, '/etc/nginx'
 set :nginx_config_name, fetch(:application)
