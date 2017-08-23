@@ -37,7 +37,6 @@ set :puma_init_active_record, false
 set :puma_preload_app, true
 
 namespace :deploy do
-  
   desc 'Run WebSocket'
   task :websocket do
   end
