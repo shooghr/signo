@@ -36,7 +36,7 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, false
 set :puma_preload_app, true
 
-set :nginx_config_name, "#{fetch(:application)}_#{fetch(:stage)}"
+set :nginx_config_name, "#{fetch(:application)}}"
 set :nginx_flags, 'fail_timeout=0'
 set :nginx_http_flags, fetch(:nginx_flags)
 set :nginx_server_name, "#{fetch(:application)}.com.br"
