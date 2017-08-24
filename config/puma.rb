@@ -12,7 +12,7 @@ threads_count = ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i
 threads threads_count, threads_count
 # bind "unix://#{shared_dir}/sockets/puma.sock"
 environment ENV.fetch('RAILS_ENV') { 'development' }
-workers ENV.fetch('WEB_CONCURRENCY') { 2 }
+workers ENV.fetch('WEB_CONCURRENCY') { 4 }
 # pidfile "#{shared_dir}/pids/puma.pid"
 # daemonize true
 # stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log"
