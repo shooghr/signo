@@ -36,8 +36,31 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, false
 set :puma_preload_app, true
 
-# namespace :deploy do
-#   desc 'Run WebSocket'
-#   task :websocket do
-#   end
-# end
+set :nginx_config_name, "#{fetch(:application)}_#{fetch(:stage)}"
+set :nginx_flags, 'fail_timeout=0'
+set :nginx_http_flags, fetch(:nginx_flags)
+set :nginx_server_name, "#{fetch(:application)}.com.br"
+set :nginx_location, '/etc/nginx'
+set :nginx_sites_available_path, '/etc/nginx/sites-available'
+set :nginx_sites_enabled_path, '/etc/nginx/sites-enabled'
+set :nginx_socket_flags, fetch(:nginx_flags)
+set :nginx_ssl_certificate, "/etc/ssl/certs/#{fetch(:nginx_config_name)}.crt"
+set :nginx_ssl_certificate_key, "/etc/ssl/private/#{fetch(:nginx_config_name)}.key"
+set :nginx_use_ssl, false
+set :nginx_pid, '/run/nginx.pid'
+
+set :nginx_access_log_file, shared_path.join('log/nginx.stdout.log')
+set :nginx_error_log_file, shared_path.join('log/nginx.stderr.log')
+
+namespace :deploy do
+  desc 'Run WebSocket'
+  task :websocket do
+    on fetch(:bundle_servers) do
+      within release_path do
+        with fetch(:bundle_env_variables, {}) do
+          execute :bundle, 'exec', 'puma -p 28080 cable/config.ru'
+        end
+      end
+    end
+  end
+end
