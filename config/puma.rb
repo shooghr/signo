@@ -3,23 +3,19 @@
 # Any libraries that use thread pools should be configured to match
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum, this matches the default thread size of Active Record.
-DEPLOY_ROOT = '/var/www/signo'
+# DEPLOY_ROOT = '/home/desenvolvimento/apps/signo'
 app_dir = File.expand_path('../..', __FILE__)
-shared_dir = "#{ DEPLOY_ROOT }/shared"
-
+# shared_dir = "#{ DEPLOY_ROOT }/shared"
+port        ENV.fetch('PORT') { 28080 }
 
 threads_count = ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i
 threads threads_count, threads_count
-bind "unix://#{shared_dir}/sockets/puma.sock"
-environment ENV.fetch('RAILS_ENV') { 'production' }
+# bind "unix://#{shared_dir}/sockets/puma.sock"
+environment ENV.fetch('RAILS_ENV') { 'development' }
 workers ENV.fetch('WEB_CONCURRENCY') { 2 }
-pidfile "#{shared_dir}/pids/puma.pid"
-daemonize true
-
-
-stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log"
-
-preload_app!
+# pidfile "#{shared_dir}/pids/puma.pid"
+# daemonize true
+# stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log"
 
 on_worker_boot do
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
